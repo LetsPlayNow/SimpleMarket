@@ -1,2 +1,25 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<h1>Category <%= @category.name %></h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Desctiption</th>
+    <th>Image</th>
+    <th>Price</th>
+    <th>Link</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= image_tag(product.image_url) %></td>
+        <td><%= product.price %></td>
+        <td><%= link_to 'Show', product %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

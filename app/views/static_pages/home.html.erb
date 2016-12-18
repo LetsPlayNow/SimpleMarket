@@ -1,1 +1,24 @@
-<h1>Market home</h1>
+<h2>Product categories</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Desctiption</th>
+    <th>Image</th>
+    <th>Link</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td><%= category.description %></td>
+        <td><%= image_tag(category.image_url) %></td>
+        <td><%= link_to 'Show', category %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%# link_to 'New Product', new_product_path %>

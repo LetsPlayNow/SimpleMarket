@@ -1,23 +1,21 @@
 Rails.application.routes.draw do
-  get 'orders/index'
+  get 'orders', to: 'orders#index'
+  get 'orders/:id', to: 'orders#show'
+  post 'create_order', 'to': 'orders#create', as: 'create_order'
 
-  get 'orders/show'
+  get 'cart', to: 'shopping_carts#show', as: :cart
+  resource :shopping_carts, only: [:show, :edit, :update]
 
-  get 'shopping_carts/show'
-
-  get 'shopping_carts/edit'
-
-  get 'shopping_carts/update'
-
-  get 'products/show'
-
-  get 'categories/show'
+  post 'products/:id', to: 'products#add_to_cart', as: 'add_to_cart'
+  resources :products, only: [:show]
+  resources :categories, only: [:show]
 
   get 'home', to: 'static_pages#home', as: 'home'
   get 'info', to: 'static_pages#info', as: 'info'
 
   devise_for :users
   ActiveAdmin.routes(self)
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

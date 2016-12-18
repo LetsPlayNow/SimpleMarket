@@ -7,8 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header>
+    <h1><%= link_to 'Market', :root %></h1>
+    <% if user_signed_in? %>
+        <%= link_to 'Sign Out', destroy_user_session_path%>
+        <%= link_to 'My Orders', orders_path%>
+        <%= link_to 'My Cart', cart_path%>
+    <% else %>
+        <%= link_to 'Sign In', new_user_session_path %>
+        <%= link_to 'Sign Up', new_user_session_path %>
+    <% end %>
+  </header>
 
-<%= yield %>
+  <%= yield %>
 
   <hr>
   <p class="notice"><%= notice %></p>

@@ -1,2 +1,8 @@
-<h1>Orders#show</h1>
-<p>Find me in app/views/orders/show.html.erb</p>
+<h1>Order <%= @order.id %></h1>
+Date <% @order.created_at %>
+Purchases <br>
+<% @order.purchases.each do |purchase| %>
+    <div>Name <%= purchase.product.name %> </div>
+    <div>Amount <%= purchase.amount %></div>
+<% end %>
+<div>Total cost: <%= @order.total_cost %></div>

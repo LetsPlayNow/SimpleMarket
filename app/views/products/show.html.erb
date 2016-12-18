@@ -1,2 +1,11 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<h1><%= @product.name %></h1>
+<%= image_tag(@product.image_url) %>
+<div>
+  Amount: <%= @product.amount %>
+</div>
+
+<div>
+  Price: <%= @product.price %>
+</div>
+
+<%= button_to('Add to cart', action: :add_to_cart) %>
