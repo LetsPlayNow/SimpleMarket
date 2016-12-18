@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   get 'orders', to: 'orders#index'
   get 'orders/:id', to: 'orders#show'
   post 'create_order', 'to': 'orders#create', as: 'create_order'
@@ -13,6 +15,17 @@ Rails.application.routes.draw do
   get 'info', to: 'static_pages#info', as: 'info'
 
   devise_for :users
+
+  namespace :admin do
+    resources :users
+    resources :categories
+    resources :orders
+    resources :products
+    resources :purchases
+    resources :shopping_carts
+
+    root to: "users#index"
+  end
   # ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation: first created -> highest priority.
