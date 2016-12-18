@@ -10,12 +10,11 @@ class PurchaseDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     order: Field::BelongsTo,
     shopping_cart: Field::BelongsTo,
-    product: Field::HasOne,
+    product: Field::BelongsTo,
     id: Field::Number,
     amount: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    product_id: Field::Number,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -40,7 +39,6 @@ class PurchaseDashboard < Administrate::BaseDashboard
     :amount,
     :created_at,
     :updated_at,
-    :product_id,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -51,7 +49,6 @@ class PurchaseDashboard < Administrate::BaseDashboard
     :shopping_cart,
     :product,
     :amount,
-    :product_id,
   ].freeze
 
   # Overwrite this method to customize how purchases are displayed
