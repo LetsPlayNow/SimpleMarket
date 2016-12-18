@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218051432) do
+ActiveRecord::Schema.define(version: 20161218055648) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -24,7 +24,10 @@ ActiveRecord::Schema.define(version: 20161218051432) do
   create_table "orders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "users_id"
   end
+
+  add_index "orders", ["users_id"], name: "index_orders_on_users_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
@@ -32,20 +35,33 @@ ActiveRecord::Schema.define(version: 20161218051432) do
     t.decimal  "price"
     t.string   "image_url"
     t.string   "string"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "categories_id"
   end
+
+  add_index "products", ["categories_id"], name: "index_products_on_categories_id"
 
   create_table "purchases", force: :cascade do |t|
     t.integer  "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "products_id"
+    t.integer  "orders_id"
+    t.integer  "shopping_carts_id"
   end
+
+  add_index "purchases", ["orders_id"], name: "index_purchases_on_orders_id"
+  add_index "purchases", ["products_id"], name: "index_purchases_on_products_id"
+  add_index "purchases", ["shopping_carts_id"], name: "index_purchases_on_shopping_carts_id"
 
   create_table "shopping_carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "users_id"
   end
+
+  add_index "shopping_carts", ["users_id"], name: "index_shopping_carts_on_users_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
