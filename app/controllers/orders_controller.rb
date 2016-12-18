@@ -8,14 +8,16 @@ class OrdersController < ApplicationController
     @order = Order.where(user_id: current_user.id, id: order_id).first
   end
 
-
-  # Fixme can create empty order
   def create
     purchases = current_user.shopping_cart.purchases
-    @order = Order.new
-    @order.purchases = purchases
-    @order.save
-    current_user.shopping_cart.purchases.clear
+    if purchases.empty?
+      flash[:alert] = "Cart is empty"
+    else
+      @order = Order.new
+      @order.purchases = purchases
+      @order.save
+      current_user.shopping_cart.purchases.clear
+    end
     redirect_to :cart
   end
 end

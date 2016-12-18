@@ -3,11 +3,11 @@ class ShoppingCartsController < ApplicationController
     @cart = current_user.shopping_cart
   end
 
-  # TODO
-  def edit
+  def update
   end
 
-  # TODO
-  def update
+  def delete_item
+    current_user.shopping_cart.delete(Purchase.(params[:id]))
+    redirect_to controller: :shopping_carts, action: :show
   end
 end

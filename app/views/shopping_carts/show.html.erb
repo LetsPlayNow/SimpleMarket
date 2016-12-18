@@ -1,9 +1,21 @@
 <h1>My Shopping cart</h1>
-<% @cart.purchases.each do |purchase| %>
-    <div>Name <%= purchase.product.name %> </div>
-    <div>Price <%= purchase.product.price %> </div>
-    <div>Amount <%= purchase.amount %></div>
-<% end %>
 
+<table>
+  <tr>
+    <td>Name</td>
+    <td>Price</td>
+    <td>Amount</td>
+    <td>Delete</td>
+  </tr>
+
+  <% @cart.purchases.each do |purchase| %>
+        <tr>
+          <td> <%= purchase.product.name %> </td>
+          <td> <%= purchase.product.price %> </td>
+          <td> <%= purchase.amount %> </td>
+          <td> <%= button_to "X", "cart/delete_purchase/#{purchase.id}"%> </td>
+        </tr>
+  <% end %>
+</table>
 
 <%= button_to 'Create order', :create_order %>
