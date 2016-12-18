@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  get 'orders/index'
+
+  get 'orders/show'
+
+  get 'shopping_carts/show'
+
+  get 'shopping_carts/edit'
+
+  get 'shopping_carts/update'
+
+  get 'products/show'
+
+  get 'categories/show'
+
+  get 'home', to: 'static_pages#home', as: 'home'
+  get 'info', to: 'static_pages#info', as: 'info'
+
   devise_for :users
   ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
@@ -55,4 +72,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  root 'static_pages#home'
 end
