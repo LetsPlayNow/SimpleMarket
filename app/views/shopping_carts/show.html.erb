@@ -1,21 +1,27 @@
 <h1>My Shopping cart</h1>
 
-<table>
-  <tr>
-    <td>Name</td>
-    <td>Price</td>
-    <td>Amount</td>
-    <td>Delete</td>
-  </tr>
+<% if @cart.purchases.exists? %>
+  <table class="table">
+    <tr>
+      <td>Name</td>
+      <td>Price</td>
+      <td>Amount</td>
+      <td>Delete</td>
+    </tr>
 
-  <% @cart.purchases.each do |purchase| %>
-        <tr>
-          <td> <%= purchase.product.name %> </td>
-          <td> <%= purchase.product.price %> </td>
-          <td> <%= purchase.amount %> </td>
-          <td> <%= button_to "X", "cart/delete_purchase/#{purchase.id}"%> </td>
-        </tr>
-  <% end %>
-</table>
+    <% @cart.purchases.each do |purchase| %>
+          <tr>
+            <td> <%= purchase.product.name %> </td>
+            <td> <%= purchase.product.price %> </td>
+            <td> <%= purchase.amount %> </td>
+            <td> <%= button_to "X", "cart/delete_purchase/#{purchase.id}", class: 'btn-danger'%> </td>
+          </tr>
+    <% end %>
+  </table>
 
-<%= button_to 'Create order', :create_order %>
+  <%= button_to 'Create order', :create_order, :class => 'btn-success btn-lg' %>
+<% else %>
+    <div class="alert alert-warning">
+      <strong> Your Shopping cart is empty!</strong>
+    </div>
+<% end %>

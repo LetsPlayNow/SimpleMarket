@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  get 'orders', to: 'orders#index'
-  get 'orders/:id', to: 'orders#show'
+  resources :orders, :only => [:index, :show]
   post 'create_order', 'to': 'orders#create', as: 'create_order'
 
   get 'cart', to: 'shopping_carts#show', as: :cart
   post 'cart/delete_purchase/:id', to: 'shopping_carts#delete_item', as: :delete_item
 
 
-  post 'products/:id', to: 'products#add_to_cart', as: 'add_to_cart'
+  post 'add_to_cart', to: 'products#add_to_cart', as: 'add_to_cart'
   resources :products, only: [:show]
   resources :categories, only: [:show]
 

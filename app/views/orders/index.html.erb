@@ -1,18 +1,33 @@
+<%= stylesheet_link_tag 'orders' %>
+
 <h1>Orders</h1>
 <% if @orders.empty? %>
-    <h2>No orders</h2>
-<% else %>
+    <div class="alert alert-warning">
+      <strong> You have no orders</strong>
+    </div>
 
-  <% @orders.each do |order| %>
-        <div class="order">
-          Date <% order.created_at %>
-          Purchases <br>
+<% else %>
+    <table class="table">
+      <tr>
+        <td>Order</td>
+        <td>Date</td>
+        <td>Purchases</td>
+        <td>Total cost</td>
+      </tr>
+
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= link_to "Order #{order.id}", "orders/#{order.id}" %></td>
+        <td><ul>
           <% order.purchases.each do |purchase| %>
-              <div>Name <%= purchase.product.name %> </div>
-              <div>Amount <%= purchase.amount %></div>
+              <li><%= link_to purchase.product.name, purchase.product %> (<%= purchase.amount %>)</li>
           <% end %>
-          <div>Total cost: <%= order.total_cost %></div>
-          <%= link_to 'Order', "orders/#{order.id}" %>
-        </div>
-  <% end %>
+        </ul></td>
+        <td>
+          <%= order.created_at %>
+        </td>
+        <td><%= order.total_cost %></td>
+      </tr>
+    <% end %>
+    </table>
 <% end %>

@@ -1,8 +1,12 @@
 <h1>Order <%= @order.id %></h1>
-Date <% @order.created_at %>
-Purchases <br>
-<% @order.purchases.each do |purchase| %>
-    <div>Name <%= purchase.product.name %> </div>
-    <div>Amount <%= purchase.amount %></div>
-<% end %>
+
+<div class="well">
+<p>Date: <%= @order.created_at %></p>
+Purchases
+<ul>
+  <% @order.purchases.each do |purchase| %>
+      <li><%= link_to purchase.product.name, purchase.product %> (<%= purchase.amount %>)</li>
+  <% end %>
+</ul>
 <div>Total cost: <%= @order.total_cost %></div>
+</div>

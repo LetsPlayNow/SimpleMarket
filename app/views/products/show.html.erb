@@ -1,4 +1,7 @@
 <h1><%= @product.name %></h1>
+<h2><%= @product.description %></h2>
+
+<div></div>
 <%= image_tag(@product.image_url) %>
 <div>
   Amount: <%= @product.amount %>
@@ -8,4 +11,16 @@
   Price: <%= @product.price %>
 </div>
 
-<%= button_to('Add to cart', action: :add_to_cart) %>
+<% if @product.amount > 0 %>
+    <%= form_tag(add_to_cart_path, :method => :post) do %>
+        <%= number_field_tag(:amount, 1) %>
+        <%= hidden_field_tag(:id, @product.id)%>
+        <%= submit_tag("Add to cart") %>
+    <% end %>
+<% end %>
+
+<% if flash[:buy_success] %>
+    <div class="alert alert-success"><%= flash[:buy_success] %></div>
+<% elsif flash[:buy_danger] %>
+    <div class="alert alert-danger"><%= flash[:buy_danger] %></div>
+<% end %>
