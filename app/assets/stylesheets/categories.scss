@@ -2,15 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-img{
-  max-height:100px;
+html, body{
+  height: 100%;
 }
 
 .row{
   width: 100%;
 }
 
-.category-info{
+.categories_info {
   width: 100%;
+  margin: 0 5px 5px 5px;
+}
+
+.panel-body{
+  // height:80%;
+}
+
+.category_img {
+  width: 20%;
+  max-width: 20%;
+  float:left;
+  margin: 0 4% 0 0;
+}
+
+.description{
+  width: 75%;
+  float:left;
 }

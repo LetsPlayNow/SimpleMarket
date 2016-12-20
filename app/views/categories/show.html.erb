@@ -2,6 +2,13 @@
 
 <h2>Category <%= @category.name %></h2>
 <h3>Description: <%= @category.description %> </h3>
+
+<% if flash[:buy_success] %>
+    <div class="alert alert-success"><%= flash[:buy_success] %></div>
+<% elsif flash[:buy_danger] %>
+    <div class="alert alert-danger"><%= flash[:buy_danger] %></div>
+<% end %>
+
 <% @products.each do |product| %>
     <div class = "row">
       <div class="category-info col-md-12 center-block well">
@@ -10,18 +17,11 @@
         <div><%= product.description %></div><hr>
         <div>Lasts: <%= product.amount %></div>
         <div>Price: <%= product.price %></div>
-
+        <div>Id: <%= product.id %></div>
         <% if product.amount > 0 %>
-            <%= form_tag(add_to_cart_path, :method => :post) do %>
-                <%= hidden_field_tag(:id, product.id)%>
+            <%= form_tag({:controller => :shopping_carts, :action => :add_item, :id => product.id}, :method => :post) do %>
                 <%= number_field_tag(:amount, 1) %>
                 <%= submit_tag("Add to cart") %>
-            <% end %>
-
-            <% if flash[:buy_success] %>
-                <div class="alert alert-success"><%= flash[:buy_success] %></div>
-            <% elsif flash[:buy_danger] %>
-                <div class="alert alert-danger"><%= flash[:buy_danger] %></div>
             <% end %>
         <% end %>
       </div>

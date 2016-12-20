@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
-  resources :orders, :only => [:index, :show]
-  post 'create_order', 'to': 'orders#create', as: 'create_order'
+  resources :orders, :only => [:index, :create, :show]
 
-  get 'cart', to: 'shopping_carts#show', as: :cart
-  post 'cart/delete_purchase/:id', to: 'shopping_carts#delete_item', as: :delete_item
+  resource :shopping_carts, :only => [:show]
+  post 'cart/del_item/:id', to: 'shopping_carts#delete_item', as: :delete_item
+  post 'cart/add_item/:id', to: 'shopping_carts#add_item', as: :add_item
 
-
-  post 'add_to_cart', to: 'products#add_to_cart', as: 'add_to_cart'
   resources :products, only: [:show]
-  resources :categories, only: [:show]
+  resources :categories, only: [:index, :show]
 
-  get 'home', to: 'static_pages#home', as: 'home'
-  get 'info', to: 'static_pages#info', as: 'info'
+  #get 'info', to: 'static_pages#info', as: 'info'
 
+  # Devise gem for users
   devise_for :users
 
+  # Administrate gem
   namespace :admin do
     resources :users
     resources :categories
@@ -26,5 +25,5 @@ Rails.application.routes.draw do
     root to: "users#index"
   end
 
-  root 'static_pages#home'
+  root to: 'categories#index'
 end

@@ -12,8 +12,7 @@
 </div>
 
 <% if @product.amount > 0 %>
-    <%= form_tag(add_to_cart_path, :method => :post) do %>
-        <%= number_field_tag(:amount, 1) %>
+    <%= form_tag({:controller => :shopping_carts, :action => :add_item, :id => product.id}, :method => :post) do %>
         <%= hidden_field_tag(:id, @product.id)%>
         <%= submit_tag("Add to cart") %>
     <% end %>

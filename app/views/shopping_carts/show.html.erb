@@ -1,4 +1,17 @@
-<h1>My Shopping cart</h1>
+<%= stylesheet_link_tag 'shopping_carts' %>
+
+<div class="row">
+  <div class="col-sm-8">
+    <h1>My Shopping cart</h1>
+  </div>
+
+  <% if @cart.purchases.exists? %>
+    <div class="col-sm-3">
+      <%= button_to 'Create order', orders_path,  :class => 'btn-success btn-lg' %>
+    </div>
+  <% end %>
+</div>
+
 
 <% if @cart.purchases.exists? %>
   <table class="table">
@@ -14,12 +27,15 @@
             <td> <%= purchase.product.name %> </td>
             <td> <%= purchase.product.price %> </td>
             <td> <%= purchase.amount %> </td>
-            <td> <%= button_to "X", "cart/delete_purchase/#{purchase.id}", class: 'btn-danger'%> </td>
+            <td>
+              <%= button_to "X", {:controller => :shopping_carts,
+                                  :action => :delete_item,
+                                  :id => purchase.id}, class: 'btn-danger'%>
+            </td>
           </tr>
     <% end %>
   </table>
 
-  <%= button_to 'Create order', :create_order, :class => 'btn-success btn-lg' %>
 <% else %>
     <div class="alert alert-warning">
       <strong> Your Shopping cart is empty!</strong>

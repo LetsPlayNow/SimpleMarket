@@ -21,6 +21,6 @@ class OrdersController < ApplicationController
       @order.save
       current_user.shopping_cart.purchases.clear
     end
-    redirect_to :cart
+    redirect_to :shopping_carts
   end
 end
