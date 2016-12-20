@@ -1,27 +1,29 @@
-<%= stylesheet_link_tag 'categories' %>
+<%= stylesheet_link_tag "categories", media: "all", "data-turbolinks-track" => "reload" %>
 
 <h2>Category <%= @category.name %></h2>
 <h3>Description: <%= @category.description %> </h3>
 <% @products.each do |product| %>
-    <div class="category-info col-md-3 center-block well">
-      <h3><%= link_to product.name, product %></h3>
-      <%= image_tag(product.image_url) %>
-      <div><%= product.description %></div><hr>
-      <div>Lasts: <%= product.amount %></div>
-      <div>Price: <%= product.price %></div>
+    <div class = "row">
+      <div class="category-info col-md-12 center-block well">
+        <h3><%= link_to product.name, product %></h3>
+        <%= image_tag(product.image_url) %>
+        <div><%= product.description %></div><hr>
+        <div>Lasts: <%= product.amount %></div>
+        <div>Price: <%= product.price %></div>
 
-      <% if product.amount > 0 %>
-          <%= form_tag(add_to_cart_path, :method => :post) do %>
-              <%= hidden_field_tag(:id, product.id)%>
-              <%= number_field_tag(:amount, 1) %>
-              <%= submit_tag("Add to cart") %>
-          <% end %>
+        <% if product.amount > 0 %>
+            <%= form_tag(add_to_cart_path, :method => :post) do %>
+                <%= hidden_field_tag(:id, product.id)%>
+                <%= number_field_tag(:amount, 1) %>
+                <%= submit_tag("Add to cart") %>
+            <% end %>
 
-          <% if flash[:buy_success] %>
-              <div class="alert alert-success"><%= flash[:buy_success] %></div>
-          <% elsif flash[:buy_danger] %>
-              <div class="alert alert-danger"><%= flash[:buy_danger] %></div>
-          <% end %>
-      <% end %>
+            <% if flash[:buy_success] %>
+                <div class="alert alert-success"><%= flash[:buy_success] %></div>
+            <% elsif flash[:buy_danger] %>
+                <div class="alert alert-danger"><%= flash[:buy_danger] %></div>
+            <% end %>
+        <% end %>
+      </div>
     </div>
 <% end %>
