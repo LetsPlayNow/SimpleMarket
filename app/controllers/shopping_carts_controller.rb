@@ -8,7 +8,6 @@ class ShoppingCartsController < ApplicationController
 
   # add_item/:id
   def add_item
-    p params
     @product = Product.find(params[:id])
     amount = Integer(params[:amount])
     if amount <= @product.amount && amount > 0
@@ -27,7 +26,11 @@ class ShoppingCartsController < ApplicationController
       notice = {:buy_danger => "Invalid amount of purchase"}
     end
 
-    redirect_to request.referrer, :flash => notice
+    if request.referrer.nil?
+      redirect_to @product, :flash => notice
+    else
+      redirect_to request.referrer, :flash => notice # todo may be use here head request
+    end
   end
 
   #delete_item/:id

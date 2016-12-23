@@ -13,4 +13,11 @@ class User < ActiveRecord::Base
   def role()
     return admin
   end
+
+  after_create :create_cart
+  private
+    def create_cart
+      create_shopping_cart
+      save
+    end
 end

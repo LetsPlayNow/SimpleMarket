@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   resources :orders, :only => [:index, :create, :show]
 
   resource :shopping_carts, :only => [:show]
-  post 'cart/del_item/:id', to: 'shopping_carts#delete_item', as: :delete_item
-  post 'cart/add_item/:id', to: 'shopping_carts#add_item', as: :add_item
+  post 'cart/del_item/', to: 'shopping_carts#delete_item', as: :delete_item
+  post 'cart/add_item/', to: 'shopping_carts#add_item', as: :add_item
 
   resources :products, only: [:show]
   resources :categories, only: [:index, :show]
